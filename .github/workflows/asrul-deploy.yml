@@ -20,7 +20,7 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Use Node.js ${{ matrix.node-version }}
+    - name: Use Node.js ${{ matrix.node-version }} ${{ secrets.GITHUB_TOKEN }}
       uses: actions/setup-node@v1
       with:
         node-version: ${{ matrix.node-version }}
@@ -32,10 +32,10 @@ jobs:
     - name: Build my App  
       run: npm run build
       env:
-        NEXT_PUBLIC_BASE_PATH: ${{ secrets.NEXT_PUBLIC_BASE_PATH }}
+        NEXT_PUBLIC_BASE_PATH: /blog
     - run: npm run export
       env:
-        NEXT_PUBLIC_BASE_PATH: ${{ secrets.NEXT_PUBLIC_BASE_PATH }}
+        NEXT_PUBLIC_BASE_PATH: /blog
     - run: touch ./out/.nojekyll
     
     - name: Deploy 🚀
